@@ -10,6 +10,6 @@ public class Game {
     }
 
     public void start() {
-        new CorridorSegment(mapGame).playSegment();
+        new CorridorSegment(mapGame, mapGame.segmentID).playSegment();
     }
 }

@@ -2,10 +2,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapGame {
-    private final List<Segment> segments = new ArrayList<>();
+    private final List<Segment> segments;
+    public int segmentID;
+
+    public MapGame() {
+        segments = new ArrayList<>();
+        segmentID = 0;
+    }
 
     public void addSegment(Segment segment) {
         segments.add(segment);
+        segmentID++;
     }
 
     public Segment getSegment(int i) {
