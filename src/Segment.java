@@ -65,16 +65,8 @@ public class Segment {
     }
 
     public void goBackward() {
-//        int i = mapGame.findNumberOfSegment(this);
-//        if (i == 0) {
-//            Main.endGame();
-//        } else if (i > 0) {
-//            System.out.println("НОМЕР СЕГМЕНТА С КОТОРОГО ВЫШЕЛ: " + i);
-//            System.out.println("НОМЕР СЕГМЕНТА НА КОТОРЫЙ ПРИШЕЛ: " + (i - 1));
-//            mapGame.getSegment(i - 1).playSegment();
-//        }
         if (this.id == 0) {
-            Main.endGame();
+            Game.endGame();
         } else {
             System.out.println("НОМЕР СЕГМЕНТА С КОТОРОГО ВЫШЕЛ: " + this.id);
             System.out.println("НОМЕР СЕГМЕНТА НА КОТОРЫЙ ПРИШЕЛ: " + this.parent_id);
