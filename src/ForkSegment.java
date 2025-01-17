@@ -25,12 +25,15 @@ public class ForkSegment extends Segment {
                         this.goBackward();
                         return;
                     }
-                    case "левую":
-                    case "правую": {
-                        this.goForward();
+                    case "левую": {
+                        this.goForward(1);
                         return;
                     }
-                }
+                    case "правую": {
+                        this.goForward(2);
+                        return;
+                    }
+                } this.playSegment();
             }
             case 3: {
                 System.out.println(SegmentsConstants.TRIPLE_FORK_OFFER);
@@ -40,12 +43,17 @@ public class ForkSegment extends Segment {
                         this.goBackward();
                         return;
                     }
-                    case "левую":
-                    case "среднюю":
-                    case "правую": {
-                        this.goForward();
+                    case "левую": {
+                        this.goForward(1);
+                        return;
                     }
-                }
+                    case "среднюю": {
+                        this.goForward(0);
+                    }
+                    case "правую": {
+                        this.goForward(2);
+                    }
+                } this.playSegment();
             }
         }
     }

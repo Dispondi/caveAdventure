@@ -1,6 +1,7 @@
 import support.SupportOperations;
 import segmentswork.SegmentsConstants;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Segment {
@@ -8,12 +9,14 @@ public class Segment {
     public final String description;
     public final int id;
     public final int parent_id;
+    public int[] child_id; // чтобы было несколько проходов
 
     protected Segment(String description, MapGame mapGame, int parent_id) {
         this.description = description;
         this.mapGame = mapGame;
         this.id = mapGame.segmentID;
         this.parent_id = parent_id;
+        this.child_id = new int[3]; // вперед, влево, вправо
         mapGame.addSegment(this);
     }
     private static Segment createRandSegment(MapGame mapGame, int parent_id) {
@@ -26,7 +29,7 @@ public class Segment {
                 return new ForkSegment(mapGame, parent_id);
             }
         }
-        return null; // когда сделаю больше сегментов, здесь будет возвращаться обычный коридор
+        return null;
     }
     public void playSegment() {
         Scanner sc = new Scanner(System.in);
@@ -45,8 +48,22 @@ public class Segment {
         } this.playSegment();
     }
     public void goForward() {
-        createRandSegment(mapGame, this.id).playSegment();
+        if (this.child_id[0] != 0) mapGame.getSegment(this.child_id[0]).playSegment();
+        else {
+            Segment childSegment = Objects.requireNonNull(createRandSegment(mapGame, this.id));
+            this.child_id[0] = childSegment.id;
+            childSegment.playSegment();
+        }
     }
+    public void goForward(int i) {
+        if (this.child_id[i] != 0) mapGame.getSegment(this.child_id[i]).playSegment();
+        else {
+            Segment childSegment = Objects.requireNonNull(createRandSegment(mapGame, this.id));
+            this.child_id[i] = childSegment.id;
+            childSegment.playSegment();
+        }
+    }
+
     public void goBackward() {
 //        int i = mapGame.findNumberOfSegment(this);
 //        if (i == 0) {
