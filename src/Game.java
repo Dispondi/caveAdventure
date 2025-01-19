@@ -2,18 +2,37 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
-    public int DIFFICULT;
-    public int WAY_LENGTH;
+
+    private int DIFFICULT;
+    private int WAY_LENGTH;
+    private boolean isWinFound;
     private final MapGame mapGame;
 
     public Game(int d, int l) {
         DIFFICULT = d;
         WAY_LENGTH = l;
+        isWinFound = false;
         mapGame = new MapGame();
     }
 
+    public void setWinFoundTrue() {
+        isWinFound = true;
+    }
+
+    public boolean isWinFound() {
+        return isWinFound;
+    }
+
+    public int getDIFFICULT() {
+        return DIFFICULT;
+    }
+
+    public int getWAY_LENGTH() {
+        return WAY_LENGTH;
+    }
+
     private void start() {
-        new CorridorSegment(mapGame, mapGame.segmentID).playSegment();
+        new CorridorSegment(mapGame, mapGame.segmentID, this).playSegment();
     }
 
     private void printStartMenu() {
@@ -85,7 +104,7 @@ public class Game {
         WAY_LENGTH = Math.abs(playerMessage);
         startMenu();
     }
-    public static void endGame() {
-        System.out.println("Вы вышли из подземелья. Конец.");
+    public void endGame() {
+        System.out.println("Конец.");
     }
 }
