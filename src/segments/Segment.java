@@ -1,7 +1,10 @@
+package segments;
+
 import support.SupportOperations;
 import segmentswork.SegmentsConstants;
+import game.*;
 
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.Objects;
 
 public abstract class Segment {
@@ -54,9 +57,11 @@ public abstract class Segment {
         }
     }
     protected void goForward(int i) {
+/*
         System.out.println("ID СЕГМЕНТА = " + id);
         System.out.println("ID РОДИТЕЛЯ = " + parent_id);
         System.out.println("ID ДЕТЕЙ = " + Arrays.toString(child_id));
+*/
         if (this.child_id[i] != 0) mapGame.getSegment(this.child_id[i]).playSegment();
         else {
             Segment childSegment = Objects.requireNonNull(this.createRandSegment());
@@ -69,9 +74,11 @@ public abstract class Segment {
         if (this.id == 0) {
             game.endGame();
         } else {
+/*
             System.out.println("ID СЕГМЕНТА = " + id);
             System.out.println("ID РОДИТЕЛЯ = " + parent_id);
             System.out.println("ID ДЕТЕЙ = " + Arrays.toString(child_id));
+*/
             mapGame.getSegment(this.parent_id).playSegment();
         }
     }

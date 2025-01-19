@@ -1,10 +1,14 @@
+package segments;
+
 import segmentswork.SegmentsConstants;
+import game.*;
 
 import java.util.Scanner;
 
-public class CorridorSegment extends Segment {
-    public CorridorSegment(MapGame mapGame, int parent_id, Game game) {
-        super(SegmentsConstants.CORRIDOR_DESCRIPTION, mapGame, parent_id, game);
+public class WinSegment extends Segment{
+    protected WinSegment(MapGame mapGame, int parent_id, Game game) {
+        super(SegmentsConstants.WIN_DESCRIPTION, mapGame, parent_id, game);
+        game.setWinFoundTrue(); // чтобы не нашелся еще один выход
     }
 
     @Override
@@ -13,9 +17,8 @@ public class CorridorSegment extends Segment {
         System.out.println(this.description);
         String playerMessage = sc.nextLine().toLowerCase();
         switch (playerMessage) {
-            case "вперёд":
-            case "вперед": {
-                goForward();
+            case "да": {
+                game.endGame();
                 return;
             }
             case "назад": {

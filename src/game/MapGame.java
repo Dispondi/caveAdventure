@@ -1,3 +1,7 @@
+package game;
+
+import segments.Segment;
+
 import java.util.ArrayList;
 import java.util.List;
 
