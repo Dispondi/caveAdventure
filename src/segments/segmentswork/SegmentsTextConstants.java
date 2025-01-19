@@ -1,6 +1,6 @@
-package segmentswork;
+package segments.segmentswork;
 
-public final class SegmentsConstants {
+public final class SegmentsTextConstants {
     public static final int MIMIC_PERCENT = 30;
     public static final String CORRIDOR_SEGMENT = "corridor";
     public static final String FORK_SEGMENT = "fork";
@@ -42,7 +42,7 @@ public final class SegmentsConstants {
     public static final String TREASURE_CORRIDOR_DESCRIPTION = """
             -----------------
             Вы видите перед собой длинный коридор. Стены пропитаны влагой, а воздух наполняет запах плесени.
-            Только небольшая шкатулка с золотом лежит на полу. Желаете пройти дальше?
+            Только небольшая шкатулка с неизвестным содержимым на полу. Желаете пройти дальше?
             -Вперед/Назад/Подобрать
             -----------------
             """;
@@ -53,5 +53,5 @@ public final class SegmentsConstants {
             -Вперед/Назад
             -----------------
             """;
-    private SegmentsConstants() {}
+    private SegmentsTextConstants() {}
 }

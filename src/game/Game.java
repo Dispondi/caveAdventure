@@ -1,5 +1,6 @@
 package game;
 
+import player.Player;
 import segments.CorridorSegment;
 
 import java.util.InputMismatchException;
@@ -11,10 +12,12 @@ public class Game {
     private int WAY_LENGTH;
     private boolean isWinFound;
     private final MapGame mapGame;
+    public final Player player;
 
-    public Game(int d, int l) {
+    public Game(int d, int l, Player player) {
         DIFFICULT = d;
         WAY_LENGTH = l;
+        this.player = player;
         isWinFound = false;
         mapGame = new MapGame();
     }
@@ -76,7 +79,7 @@ public class Game {
     }
 
     private void changeDifficult() {
-        System.out.println("Введите сложность от 0 до 10:");
+        System.out.println("Введите сложность от 1 до 10:");
 
         Scanner sc = new Scanner(System.in);
         int playerMessage;
@@ -89,6 +92,7 @@ public class Game {
         }
 
         DIFFICULT = Math.min(Math.abs(playerMessage), 10);
+        DIFFICULT = Math.max(1, DIFFICULT); // difficult = 0 => difficult = 1;
         startMenu();
     }
 
@@ -110,5 +114,6 @@ public class Game {
     }
     public void endGame() {
         System.out.println("Конец.");
+        System.out.println("Очки: " + player.getPoints());
     }
 }
