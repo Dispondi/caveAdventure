@@ -1,7 +1,8 @@
 package segments;
 
+import enemy.Enemy;
 import support.SupportOperations;
-import segmentswork.SegmentsConstants;
+import segments.segmentswork.SegmentsTextConstants;
 import game.*;
 
 //import java.util.Arrays;
@@ -31,24 +32,38 @@ public abstract class Segment {
             return new DeadEndSegment(mapGame, this.id, game);
         }
 
-        int randI = SupportOperations.randInRange(0, SegmentsConstants.ALL_PLAYABLE_TYPES_SEGMENTS.length - 1);
-        switch (SegmentsConstants.ALL_PLAYABLE_TYPES_SEGMENTS[randI]) {
-            case SegmentsConstants.CORRIDOR_SEGMENT -> {
+        int randI = SupportOperations.randInRange(0, SegmentsTextConstants.ALL_PLAYABLE_TYPES_SEGMENTS.length - 1);
+        switch (SegmentsTextConstants.ALL_PLAYABLE_TYPES_SEGMENTS[randI]) {
+            case SegmentsTextConstants.CORRIDOR_SEGMENT -> {
                 return new CorridorSegment(mapGame, this.id, game);
             }
-            case SegmentsConstants.FORK_SEGMENT -> {
+            case SegmentsTextConstants.FORK_SEGMENT -> {
                 return new ForkSegment(mapGame, this.id, game);
             }
-            case SegmentsConstants.TREASURE_SEGMENT -> {
+            case SegmentsTextConstants.TREASURE_SEGMENT -> {
                 return new TreasureCorridorSegment(mapGame, this.id, game);
             }
         }
         return null;
     }
 
+    private static void fightActivity(Enemy enemy, Game game) {
+        while (enemy.getHealth() > 0 && !enemy.isRunAway() && game.player.getHealth() > 0) {
+            enemy.playFight();
+        }
+    }
+
     public abstract void playSegment();
 
     protected void goForward() {
+        Enemy enemy = Enemy.chanceEnemySpawn(game);
+        if (enemy != null) fightActivity(enemy, game);
+        if (game.player.getHealth() == 0) {
+            System.out.println("Вас убили.");
+            game.endGame();
+            return;
+        } // player dead
+
         if (this.child_id[0] != 0) mapGame.getSegment(this.child_id[0]).playSegment();
         else {
             Segment childSegment = Objects.requireNonNull(this.createRandSegment());
@@ -57,6 +72,13 @@ public abstract class Segment {
         }
     }
     protected void goForward(int i) {
+        Enemy enemy = Enemy.chanceEnemySpawn(game);
+        if (enemy != null) fightActivity(enemy, game);
+        if (game.player.getHealth() == 0) {
+            System.out.println("Вас убили.");
+            game.endGame();
+            return;
+        } // player dead
 /*
         System.out.println("ID СЕГМЕНТА = " + id);
         System.out.println("ID РОДИТЕЛЯ = " + parent_id);
@@ -74,11 +96,9 @@ public abstract class Segment {
         if (this.id == 0) {
             game.endGame();
         } else {
-/*
-            System.out.println("ID СЕГМЕНТА = " + id);
-            System.out.println("ID РОДИТЕЛЯ = " + parent_id);
-            System.out.println("ID ДЕТЕЙ = " + Arrays.toString(child_id));
-*/
+            Enemy enemy = Enemy.chanceEnemySpawn(game);
+            if (enemy != null) fightActivity(enemy, game);
+            if (game.player.getHealth() == 0) return; // player dead
             mapGame.getSegment(this.parent_id).playSegment();
         }
     }

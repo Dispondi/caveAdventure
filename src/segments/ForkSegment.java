@@ -1,6 +1,6 @@
 package segments;
 
-import segmentswork.SegmentsConstants;
+import segments.segmentswork.SegmentsTextConstants;
 import support.SupportOperations;
 import game.*;
 
@@ -10,7 +10,7 @@ public class ForkSegment extends Segment {
     private final int corridorsAmount;
 
     protected ForkSegment(MapGame mapGame, int parent_id, Game game) {
-        super(SegmentsConstants.FORK_DESCRIPTION, mapGame, parent_id, game);
+        super(SegmentsTextConstants.FORK_DESCRIPTION, mapGame, parent_id, game);
         corridorsAmount = SupportOperations.randInRange(2,3);
     }
 
@@ -20,7 +20,7 @@ public class ForkSegment extends Segment {
         String playerMessage;
         switch (corridorsAmount) {
             case 2: {
-                System.out.println(this.description + SegmentsConstants.DOUBLE_FORK_OFFER); // description
+                System.out.println(this.description + SegmentsTextConstants.DOUBLE_FORK_OFFER); // description
                 playerMessage = sc.nextLine().toLowerCase();
                 switch (playerMessage) {
                     case "назад": {
@@ -38,7 +38,7 @@ public class ForkSegment extends Segment {
                 } this.playSegment();
             }
             case 3: {
-                System.out.println(this.description + SegmentsConstants.TRIPLE_FORK_OFFER); // description
+                System.out.println(this.description + SegmentsTextConstants.TRIPLE_FORK_OFFER); // description
                 playerMessage = sc.nextLine().toLowerCase();
                 switch (playerMessage) {
                     case "назад": {

@@ -1,13 +1,13 @@
 package segments;
 
-import segmentswork.SegmentsConstants;
+import segments.segmentswork.SegmentsTextConstants;
 import game.*;
 
 import java.util.Scanner;
 
 public class DeadEndSegment extends Segment{
     protected DeadEndSegment(MapGame mapGame, int parent_id, Game game) {
-        super(SegmentsConstants.DEADEND_DESCRIPTION, mapGame, parent_id, game);
+        super(SegmentsTextConstants.DEADEND_DESCRIPTION, mapGame, parent_id, game);
     }
 
     @Override
