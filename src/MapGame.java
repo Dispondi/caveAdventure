@@ -19,7 +19,11 @@ public class MapGame {
         return segments.get(i);
     }
 
-    public Integer findNumberOfSegment(Segment segment) {
+    public int getMapLength() {
+        return segments.size();
+    }
+
+    public int findNumberOfSegment(Segment segment) {
         for (int i = 0; i < segments.size(); i++) {
             if (segment == segments.get(i)) {
                 return i;
