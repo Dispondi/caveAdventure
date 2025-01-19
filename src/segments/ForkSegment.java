@@ -1,5 +1,8 @@
+package segments;
+
 import segmentswork.SegmentsConstants;
 import support.SupportOperations;
+import game.*;
 
 import java.util.Scanner;
 

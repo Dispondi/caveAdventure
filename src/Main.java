@@ -1,4 +1,4 @@
-
+import game.Game;
 
 public class Main {
     private static final int DIFFICULT = 5;

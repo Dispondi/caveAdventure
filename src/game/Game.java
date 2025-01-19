@@ -1,3 +1,7 @@
+package game;
+
+import segments.CorridorSegment;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
